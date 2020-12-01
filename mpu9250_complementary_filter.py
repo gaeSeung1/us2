@@ -149,4 +149,30 @@ class MPU:
         self.roll = (self.tau)*(self.roll - self.gy*dt) + (1-self.tau)*(accRoll)
         self.pitch = (self.tau)*(self.pitch + self.gx*dt) + (1-self.tau)*(accPitch)
 
-        return round(self.yaw,1)
+        # Print data
+        print(" R: " + str(round(self.roll,1)) \
+            + " P: " + str(round(self.pitch,1)) \
+            + " Y: " + str(round(self.yaw,1)))
+
+def main():
+    # Set up class
+    gyro = 250      # 250, 500, 1000, 2000 [deg/s]
+    acc = 2         # 2, 4, 7, 16 [g]
+    tau = 0.98
+    mpu = MPU(gyro, acc, tau)
+
+    # Set up sensor and calibrate gyro with N points
+    mpu.setUp()
+    mpu.calibrateGyro(500)
+
+    # Run for 20 secounds
+    startTime = time.time()
+    while(time.time() < (startTime + 20)):
+        mpu.compFilter()
+
+    # End
+    print("Closing")
+
+# Main loop
+if __name__ == '__main__':
+	main()

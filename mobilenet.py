@@ -6,6 +6,17 @@ from queue import Queue
 import threading
 import ar_markers
 
+
+# Information of cam calibration 
+DIM=(320, 240)
+K=np.array([[221.67707080340955, 0.0, 155.52536738055687], [0.0, 223.2977065361501, 155.07273676797982], [0.0, 0.0, 1.0]])
+D=np.array([[-0.0984827193194895], [0.09959390944563078], [-0.2826711250733146], [0.23938836491127113]])
+
+def undistort(img):
+    map1, map2 = cv2.fisheye.initUndistortRectifyMap(K, D, np.eye(3), K, DIM, cv2.CV_16SC2)
+    img = cv2.remap(img, map1, map2, interpolation=cv2.INTER_LINEAR, borderMode=cv2.BORDER_CONSTANT)
+    return img
+
 def main():
         
     # construct the argument parse 
@@ -49,7 +60,7 @@ def main():
         size = (120,90)
         frame = cv2.flip(frame,-1)
         frame_resized = cv2.resize(frame,size) # resize frame for prediction
-
+        frame = undistort(frame)
         # MobileNet requires fixed dimensions for input image(s)
         # so we have to ensure that it is resized to 300x300 pixels.
         # set a scale factor to image because network the objects has differents size. 

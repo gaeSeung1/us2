@@ -229,7 +229,7 @@ def main():
                     motor('x')
                     time.sleep(3)
 
-                elif obj == "cat":
+                elif obj == 114:
                     #triangle
                     motor('q')
                     time.sleep(3)
@@ -255,41 +255,6 @@ def main():
                     motor('d')
                     time.sleep(3)
                 
-                elif obj == 114:
-                    #star
-                    motor('q')
-                    time.sleep(1)
-                    motor('c')
-                    time.sleep(1)
-                    motor('w')
-                    time.sleep(1)
-                    motor('x')
-                    time.sleep(1)
-                    motor('e')
-                    time.sleep(1)
-                    motor('z')
-                    time.sleep(1)
-                    motor('d')
-                    time.sleep(1)
-                    motor('a')
-                    time.sleep(1)
-                    motor('c')
-                    time.sleep(1)
-                    motor('q')
-                    time.sleep(1)
-                    motor('x')
-                    time.sleep(1)
-                    motor('w')
-                    time.sleep(1)
-                    motor('z')
-                    time.sleep(1)
-                    motor('e')
-                    time.sleep(1)
-                    motor('a')
-                    time.sleep(1)
-                    motor('d')
-                    time.sleep(1)
-
                 else:
                     #stop
                     motor('s')

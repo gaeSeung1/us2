@@ -57,13 +57,12 @@ MOTOR_SPEEDS = {
 print('Press "esc" to quit')
 # cam init
 capture = cv2.VideoCapture(0)
-capture.set(3,320)
-capture.set(4,240)
+
 
 # Information of cam calibration 
-DIM=(640, 480)
-K=np.array([[423.84678614672646, 0.0, 328.574274970577], [0.0, 426.2990638388311, 181.11011683414546], [0.0, 0.0, 1.0]])
-D=np.array([[-0.041247028858065506], [-0.3207044136410278], [1.2676834972699325], [-1.7300690469126907]])
+DIM=(320, 240)
+K=np.array([[221.67707080340955, 0.0, 155.52536738055687], [0.0, 223.2977065361501, 155.07273676797982], [0.0, 0.0, 1.0]])
+D=np.array([[-0.0984827193194895], [0.09959390944563078], [-0.2826711250733146], [0.23938836491127113]])
 
 def captured(img):
     cv2.imwrite(time.strftime('%m%d%H%M%S')+'.jpg', img)
@@ -130,7 +129,7 @@ def main():
         frame = cv2.flip(frame,-1)
         frame = cv2.resize(frame,(320,240))
         #undistort
-        undistorted_image = frame#undistort(frame)
+        undistorted_image = undistort(frame)
 
         #ar_marker
         markers = detect_markers(undistorted_image)
